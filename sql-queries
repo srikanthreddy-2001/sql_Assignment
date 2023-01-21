@@ -1,0 +1,53 @@
+1)Write a SQL statement to create a 1.table named countries including columns country_id, country_name and region_id and make sure that no countries except Italy, India and China will be entered in the table.?
+
+CREATE TABLE IF NOT EXISTS countries ( 
+COUNTRY_ID varchar(2),
+COUNTRY_NAME varchar(40)
+CHECK(COUNTRY_NAME IN('Italy','India','China')) ,
+REGION_ID decimal(10,0)
+);
+
+
+mysql> DESC countries;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(2)    | YES  |     | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | YES  |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+
+2)Write a SQL statement to create duplicate of countries table named country_new with all structure and data.
+
+Here in the following is the structure of the table countries.
+
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(2)    | YES  |     | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | YES  |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+	
+
+CREATE TABLE IF NOT EXISTS country_new
+AS SELECT * FROM countries;
+
+mysql> SHOW COLUMNS FROM country_new;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(8)    | YES  |     | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | YES  |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM country_new;
++------------+--------------+-----------+
+| COUNTRY_ID | COUNTRY_NAME | REGION_ID |
++------------+--------------+-----------+
+| C1         | India        |      1001 |
++------------+--------------+-----------+
+1 row in set (0.00 sec)
